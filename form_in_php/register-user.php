@@ -5,12 +5,12 @@
 
 print_r($_POST);
 
-$test = filter_input(INPUT_POST,"email",FILTER_VALIDATE_EMAIL);
+$test = filter_input(INPUT_POST,"username",FILTER_VALIDATE_EMAIL);
 
 if ($test === false) {
-    echo "\nla mail non è valida\n";
+    echo "\nregistrazione fallita\n";
 } else {
-    echo "grazie la tua email è valida: $test";
+    echo "registrazione effettuata con successo: $test";
 }
 
 ?>
