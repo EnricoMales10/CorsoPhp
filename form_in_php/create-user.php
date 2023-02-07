@@ -21,7 +21,7 @@
 
             </div>
             <div class="col-sm-4">
-                <form class="mt-1 mt-md-5" action="register-user.php" method="get">
+                <form class="mt-1 mt-md-5" action="register-user.php" method="post">
                     <div class="mb-3">
                         <label for="text" class="form-label">Nome</label>
                         <input type="text" class="form-control" name="first_name" id="first_name">
@@ -40,9 +40,10 @@
                     </div>
                     <div class="mb-3">
                         <label for="text" class="form-label">Sesso</label>
-                        <select  class="form-control" name="gender" id="gender">
-                        <option>M</option>
-                        <option>F</option>
+                        <select type="text" class="form-control" name="gender" id="gender">
+                            <option value="F">F</option>
+                            <option value="M">M</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Nome utente</label>

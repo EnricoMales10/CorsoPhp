@@ -3,9 +3,11 @@
 </h1>
 <?php
 
-print_r($_GET);
+print_r($_POST);
 
-$test = filter_input(INPUT_GET,"email",FILTER_VALIDATE_EMAIL);
+$test = filter_input(INPUT_POST,"email",FILTER_VALIDATE_EMAIL);
+
+echo "\n";
 
 if ($test === false) {
     echo "\nla mail non è valida\n";
