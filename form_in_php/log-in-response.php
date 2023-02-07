@@ -20,4 +20,5 @@ if ($test === false) {
 } else {
     echo "grazie la tua email è valida: $test";
 }
+
 ?>
