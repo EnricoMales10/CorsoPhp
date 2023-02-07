@@ -40,7 +40,9 @@
                     </div>
                     <div class="mb-3">
                         <label for="text" class="form-label">Sesso</label>
-                        <input type="text" class="form-control" name="gender" id="gender">
+                        <select  class="form-control" name="gender" id="gender">
+                        <option>M</option>
+                        <option>F</option>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Nome utente</label>
