@@ -31,8 +31,8 @@
                         <input type="text" class="form-control" name="last_name" id="last_name">
                     </div>
                     <div class="mb-3">
-                        <label for="text" class="form-label">Data di nascita</label>
-                        <input type="text" class="form-control" name="birthday" id="birthday">
+                        <label for="date" class="form-label">Data di nascita</label>
+                        <input type="date" class="form-control" name="birthday" id="birthday">
                     </div>
                     <div class="mb-3">
                         <label for="text" class="form-label">Luogo di nascita</label>
