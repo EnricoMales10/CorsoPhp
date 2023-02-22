@@ -6,11 +6,13 @@ class ValidateDate implements Validable
     {
         $valueWidoutSpace = trim(strip_tags($value));
         $d = DateTime::createFromFormat('j/n/Y', $valueWidoutSpace);
-        if($d){
-            return $d->format('j/n/Y');
-        }else{
-            return $d;
-        };
+       
+            if($d && $d->format('j/n/Y') === $valueWidoutSpace){
+                return $d->format('j/n/Y');
+            }else{
+                return false;
+            };
+            
     }
        public function message()
        {

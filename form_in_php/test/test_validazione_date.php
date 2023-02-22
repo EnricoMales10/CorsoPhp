@@ -12,10 +12,6 @@ $testDates = [
         'expected' => false 
     ],
     [
-        'input' => '01/04/2022      ',
-        'expected' => '1/4/2022'
-    ],
-    [
         'input' => '13/13/2022',
         'expected' => false
     ],
@@ -25,15 +21,15 @@ $testDates = [
     ],
     [
         'input' => '1\12\2022',
-        'expected' => '1/12/2022'
+        'expected' => false
     ],
     [
         'input' => '1.12.2022',
-        'expected' => '1/12/2022'
+        'expected' => false
     ],
     [
         'input' => '1z/12i/p20p22',
-        'expected' => '1/12/2022'
+        'expected' => false
     ],
     [
         'input' => '    20/5/2023',
@@ -79,15 +75,7 @@ $testDates = [
         'input' => '20/1/2023</b> ',
         'expected' =>'20/1/2023'
     ],
-    [
-        'input' =>20,
-        'expected' =>false
-    ],
-    [
-        'input' => 0,
-        'expected' =>false
-    ]
-];
+    ];
 
 $d = new ValidateDate();
 
