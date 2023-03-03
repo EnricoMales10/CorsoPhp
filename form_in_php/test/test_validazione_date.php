@@ -1,92 +1,103 @@
 <?php
+
 require "./form_in_php/class/validator/Validable.php";
+
 require "./form_in_php/class/validator/ValidateDate.php";
 
-$testDates = [
+$testCases = [
     [
-        'input' => '',
-        'expected' => false 
+        "input" => "      ",
+        "expected" => false
     ],
     [
-        'input' => '       ',
-        'expected' => false 
+        "input" => "19/10/1997 ",
+        "expected" => "19/10/1997"
     ],
     [
-        'input' => '13/13/2022',
-        'expected' => false
+        "input" => " 19/10/1997 ",
+        "expected" => "19/10/1997"
     ],
     [
-        'input' => '32/13/2022',
-        'expected' => false
+        "input" => " 19/10/1997",
+        "expected" => "19/10/1997"
     ],
     [
-        'input' => '1\12\2022',
-        'expected' => false
+        "input" => "",
+        "expected" => false
     ],
     [
-        'input' => '1.12.2022',
-        'expected' => false
+        "input" => "<h1>19/10/1997</h1>",
+        "expected" => "19/10/1997"
     ],
     [
-        'input' => '1z/12i/p20p22',
-        'expected' => false
+        "input" => "<b>19/10/1997</b>",
+        "expected" => "19/10/1997"
     ],
     [
-        'input' => '    20/5/2023',
-        'expected' => '20/5/2023'
+        "input" => "<b>19/10/1997",
+        "expected" => "19/10/1997"
     ],
     [
-        'input' => ' 20/5/2023 ',
-        'expected' => '20/5/2023'
+        "input" => "19/10/1997</b>",
+        "expected" => "19/10/1997"
     ],
     [
-        'input' => '<h1>20/5/2023</h1>',
-        'expected' =>'20/5/2023'
+        "input" => "<b>   </b>",
+        "expected" => false  
     ],
     [
-        'input' => '<b>20/10/2023</b>',
-        'expected' =>'20/10/2023'
+        "input" => "<b></b>",
+        "expected" => false  
     ],
     [
-        'input' => '<b>    </b>',
-        'expected' => false
+        "input" => "<b>  ",
+        "expected" => false  
     ],
     [
-        'input' => ' <b></b>',
-        'expected' =>false
+        "input" => "32/32/1997",
+        "expected" => false
     ],
     [
-        'input' => '<b></b> ',
-        'expected' =>false
+        "input" => "19/32/1997",
+        "expected" => false
     ],
     [
-        'input' => ' <b></b> ',
-        'expected' =>false
+        "input" => "32/19/1997",
+        "expected" => false
     ],
     [
-        'input' => '<b> ',
-        'expected' =>false
+        "input" => "19-10-1997",
+        "expected" => false
     ],
     [
-        'input' => '<b>20/1/2023 ',
-        'expected' =>'20/1/2023'
+        "input" => "19#10/1997",
+        "expected" => false
     ],
     [
-        'input' => '20/1/2023</b> ',
-        'expected' =>'20/1/2023'
+        "input" => "ciccio",
+        "expected" => false
     ],
+    [
+        "input" => "33/09/75",
+        "expected" => false
+    ]
     ];
+    
+    // key è ciò che permette di accedere alle info dell' array
+    forEach($testCases as $key => $test){
+        $input = $test["input"];
+        $expected = $test["expected"];
 
-$d = new ValidateDate();
+        //validatore
+        $v = new ValidateDate();
 
-foreach ($testDates as $key => $test) {
-    $input = $test['input'];
-    $expected = $test['expected'];   
-
-    if($d->isValid($input) != $expected){
-echo "Test numero $key non superato: Mi aspettavo: ";
-var_dump($expected);
-echo "ma ho trovato ";
-var_dump($d->isValid($input));
-    };
-}
+        //istanza con metodo
+        //quando valore di input è uguale al valore che mi aspetto
+        if($v -> isValid($input) != $expected){
+            echo "\nTest con chiave $key non superato mi aspettavo: ";
+            var_dump($expected);
+            echo "\nMa ho trovato: ";
+            var_dump($v -> isValid($input));
+        }
+    }
+?>
