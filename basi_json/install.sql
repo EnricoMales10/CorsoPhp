@@ -17,13 +17,18 @@ SELECT * FROM regione;
 TRUNCATE TABLE regione;
 
 CREATE TABLE Provincia (
-    id_provincia int NOT NULL AUTO_INCREMENT,
-    nome varchar(255) NOT NULL,
-    sigla char(2) NOT NULL,
-    id_regione int,
-    PRIMARY KEY (id_provincia)
+    provincia_id int NOT NULL AUTO_INCREMENT,
+    Nome varchar(255),
+    Sigla char(2),
+    regione_id int,
+    PRIMARY KEY (provincia_id),
+    Foreign Key (regione_id) REFERENCES Regione(regione_id)
 );
 
 SELECT * FROM Provincia;
 
 TRUNCATE TABLE Provincia;
+
+DROP Table provincia;
+
+SELECT regione_id FROM Regione WHERE nome="$provincia->regione";
