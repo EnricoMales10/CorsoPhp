@@ -1,13 +1,17 @@
 <?php
+
+use Registry\it\Provincia;
+use Registry\it\Regione;
+use validator\ValidateDate;
+use validator\ValidateMail;
+use validator\ValidateRequired;
+
 require "../config.php";
-require "./class/Registry/it/Regione.php";
-require "./class/Registry/it/Provincia.php";
+require "./autoload.php";
+
 //error_reporting(E_ALL); li vede tutti
 //error_reporting(0); li spegne tutti
-require "./class/validator/Validable.php";
-require "./class/validator/ValidateRequired.php";
-require "./class/validator/ValidateDate.php";
-require "./class/validator/ValidateMail.php";
+
 
 
 $first_name = new ValidateRequired('','Il Nome è obblicatorio');
@@ -61,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <section class="row">
             <div class="col-sm-8">
-                <form class="mt-1 mt-md-5" action="create-user.php" method="post">
+                <form class="mt-1 mt-md-5" action="create_user.php" method="post">
                     <div class="mb-3">
                         <label for="first_name" class="form-label">nome</label>
                         <input type="text" 
@@ -147,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <select id="birth_province" class="form-select birth_province" name="birth_province">
                         <option value=""></option>
                                 <?php foreach(Provincia::all() as $provincia) : ?> 
-                                    <option value="<?= $provincia->provincia_id ?>"><?= $provincia->nome ?></option>
+                                    <option value="<?= $provincia->provincia_id ?>"><?= $provincia->Nome ?></option>
                                 <?php endforeach;  ?>
                         </select>
                             
