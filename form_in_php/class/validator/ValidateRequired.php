@@ -7,7 +7,7 @@
     -ogni validazione ha il suo messaggio di errore
     -impostare la classe di Bootstrap is-invalid
 */
-
+namespace validator;
 class ValidateRequired implements Validable{
 
     /** @var string rappresenta il valore immesso nel form ripulito */
@@ -57,4 +57,3 @@ class ValidateRequired implements Validable{
 }
 
 ?>
-
