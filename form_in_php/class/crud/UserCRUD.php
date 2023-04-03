@@ -34,7 +34,7 @@ class UserCRUD
         $query = "UPDATE `user` SET  `first_name`= :first_name, `last_name`= 
         :last_name, `birthday` = :birthday, `birth_city`= :birth_city, `regione_id`= 
         :regione_id, `provincia_id`=:provincia_id, 
-        -- `username`=:username, `password`=:password,
+         `username`=:username, `password`=:password,
          `gender`=:gender WHERE user_id= :user_id;";
         $stm = $conn->prepare($query);
         $stm->bindValue(':first_name',$user->first_name,\PDO::PARAM_STR);
@@ -43,8 +43,8 @@ class UserCRUD
         $stm->bindValue(':birth_city',$user->birth_city,\PDO::PARAM_STR);
         $stm->bindValue(':regione_id',$user->regione_id,\PDO::PARAM_INT);
         $stm->bindValue(':provincia_id',$user->provincia_id,\PDO::PARAM_INT);
-        // $stm->bindValue(':username',$user->username,\PDO::PARAM_STR);
-        // $stm->bindValue(':password',$user->password,\PDO::PARAM_STR);
+        $stm->bindValue(':username',$user->username,\PDO::PARAM_STR);
+        $stm->bindValue(':password',md5($user->password),\PDO::PARAM_STR);
         $stm->bindValue(':gender',$user->gender,\PDO::PARAM_STR);
         $stm->bindValue(':user_id',$user_id,PDO::PARAM_INT);
         $stm->execute();

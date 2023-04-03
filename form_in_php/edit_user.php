@@ -30,7 +30,10 @@ $validatorRunner = new ValidatorRunner([
     'birth_city'  => new ValidateRequired($user->birth_city,'La città  è obbligatoria'),
     'regione_id'  => new ValidateRequired($user->regione_id,'La regione è obbligatoria'),
     'provincia_id'  => new ValidateRequired($user->provincia_id,'La provincia è obbligatoria'),
-    'gender'  => new ValidateRequired($user->gender,'Il Genere è obbligatorio')
+    'gender'  => new ValidateRequired($user->gender,'Il Genere è obbligatorio'),
+    'username'  => new ValidateRequired('', 'Email obbligatoria'),
+    //'username_email ' => new ValidateMail('','Formato email non valido'),
+    'password' => new ValidateRequired('', 'Password obbligatoria'),
 ]);
 extract($validatorRunner->getValidatorList());
 
@@ -151,7 +154,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endif; ?>
 
             </div>
-            
+            <div class="mb-3">
+                <label for="username" class="form-label">Email</label>
+                <input type="text" value="<?php $username->getValue() ?>" class="form-control 
+                            <?php echo (!$username->getValid() && !$username->getValid()) ? 'is-invalid' : '' ?>" name="username" id="username">
+                <?php
+                //if (!$username_email->getValid()) : 
+                ?>
+                <div class="invalid-feedback">
+                    <?php //echo $username_email->getMessage() 
+                    ?>
+                </div>
+                <?php //endif 
+                ?>
+
+                <?php
+                if (!$username->getValid()) : ?>
+                    <div class="invalid-feedback">
+                        <?php echo $username->getMessage() ?>
+                    </div>
+                <?php endif ?>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" value="<?= $password->getValue() ?>" id="password" name="password" class="form-control <?php echo !$password->getValid() ? 'is-invalid' : ''  ?>">
+                <?php
+                if (!$password->getValid()) : ?>
+                    <div class="invalid-feedback">
+                        <?php echo $password->getMessage() ?>
+                    </div>
+                <?php endif ?>
+            </div>
 
             <button class="btn btn-primary btn-sm" type="submit">Aggiorna utente</button>
         </form>

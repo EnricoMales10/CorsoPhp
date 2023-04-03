@@ -16,14 +16,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $users = $crud->read();
             echo json_encode($users);
         }
-        break; 
+        break;
 
     case 'DELETE':
         $user_id = filter_input(INPUT_GET, 'user_id');
         if (!is_null($user_id)) {
             $rows = $crud->delete($user_id);
             if ($rows == 1) {
-               http_response_code(204);
+                http_response_code(204);
             }
             if ($rows == 0) {
                 http_response_code(404);
@@ -32,7 +32,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                         [
                             "status" => 404,
                             "title" =>  "Utente non trovato",
-                            "details" => "Id: ".$user_id
+                            "details" => "Id: " . $user_id
                         ]
                     ]
                 ];
@@ -42,33 +42,70 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         break;
 
-        case 'POST' :
+    case 'POST':
 
-            $input= file_get_contents('php://input');
-            $request = json_decode($input,true);
+        $input = file_get_contents('php://input');
+        $request = json_decode($input, true);
 
-            $user = User::arrayToUser($request);
-            $last_id = $crud->create($user);
-            // $response = [
-            //     'data' => [
-            //         'type' => "users",
-            //         'id' => $last_id,
-            //         'attributes' => $user
-            //     ]
-            // ];
-            $user=(array)$user;
-            unset($user['password']);
-            $user['user_id'] = $last_id;
-            $response = [
-                'data' => $user,
-                'status' => 202
-            ];
-           echo json_encode($response);
+        $user = User::arrayToUser($request);
+        $last_id = $crud->create($user);
+        // $response = [
+        //     'data' => [
+        //         'type' => "users",
+        //         'id' => $last_id,
+        //         'attributes' => $user
+        //     ]
+        // ];
+        $user = (array)$user;
+        unset($user['password']);
+        $user['user_id'] = $last_id;
+        $response = [
+            'data' => $user,
+            'status' => 202
+        ];
+        echo json_encode($response);
 
-            break;
+        break;
 
-           
+    case 'PUT':
+        $user_id = filter_input(INPUT_GET, 'user_id');
+        $input = file_get_contents('php://input');
+        $request = json_decode($input, true);
 
+        $user = User::arrayToUser($request);
+        $last_id = $crud->update($user, $user_id);
+
+        $user = (array)$user;
+        // unset($user['username']);
+        // unset($user['password']);
+        $user['user_id'] = $last_id;
+        
+            if ($last_id == 1) {
+                $response = [
+                    'data' => $user,
+                    'status' => 202
+                ];
+            }
+            if ($last_id == 0) {
+                http_response_code(404);
+                // array associativo
+                $response = [
+                    // proprietà errors
+                    // 'chiave' => "valore"
+                    'errors' => [
+                        [
+                            'status' => 404,
+                            'title' => "impossibile eseguire update",
+                            'details' => $user_id
+                        ]
+                    ]
+                ];
+            }
+
+            echo json_encode($response);
+    
+        break;
+        
     default:
         # code...
         break;
