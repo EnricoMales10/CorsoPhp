@@ -10,7 +10,7 @@
 namespace validator;
 class ValidateRequired implements Validable{
 
-    /** @var string rappresenta il valore immesso nel form ripulito */
+    /** var string rappresenta il valore immesso nel form ripulito */
     private $value;
     private  $message;
     private $hasMessage;
@@ -19,11 +19,14 @@ class ValidateRequired implements Validable{
 
     public function __construct($default_value="", $message="❗️È obbligatorio😬" ){
         $this -> value = $default_value;
-        $this -> valid = true;
         $this -> message = $message;
+        $this -> valid = true;
     }
 
     public function isValid($value){
+        if($value == null) {
+            $value = "";
+        }
         //metodo trim()elimina gli spazi all' inizio e alla fine di una stringa
         //metodo strip_tags() elimina i tag
         $strip_tag = strip_tags(($value));
@@ -34,8 +37,7 @@ class ValidateRequired implements Validable{
             $this -> valid = false;
             return false;
         }
-        $this -> valid = true;
-        $this -> value = $valueNoSpace;
+               $this -> value = $valueNoSpace;
         return $valueNoSpace;
         //se restituisco questa non super il test
         //return $value;
