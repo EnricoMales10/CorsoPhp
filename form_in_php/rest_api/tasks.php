@@ -71,29 +71,36 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 
 
-    case 'DELETE':
-        $task_id = filter_input(INPUT_GET, 'task_id');
-        if (!is_null($task_id)) {
-            $rows = $crud->delete($task_id);
-            if ($rows == 1) {
-                http_response_code(204);
-            }
-            if ($rows == 0) {
-                http_response_code(404);
-                $response = [
-                    'errors' => [
-                        [
-                            "status" => 404,
-                            "title" =>  "Utente non trovato",
-                            "details" => "Id: " . $task_id
-                        ]
-                    ]
-                ];
-            }
+        case 'DELETE':
+            $task_id = filter_input(INPUT_GET, 'task_id');
+            if (!is_null($task_id)) {
+                $rows = $crud->delete($task_id);
+                if ($rows == 1) {
+                    $response = [
+                        'data' => $task_id,
+                        'status' => 200
+                    ];
+                    echo json_encode($response);
+                }
 
-            echo json_encode($response);
-        }
-        break;
+                if ($rows == 0) {
+                    http_response_code(404);
+                    $response = [
+                        'errors' => [
+                            [
+                                'status' => 404,
+                                'title' => "Task non trovata",
+                                'details' => "Task id: " . $task_id
+                            ]
+                        ]
+                    ];
+                    echo json_encode($response);
+                }
+
+                  
+                 
+            }
+            break;
 
     case 'POST':
 

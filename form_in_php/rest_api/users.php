@@ -32,29 +32,34 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         break;
 
-    case 'DELETE':
-        $user_id = filter_input(INPUT_GET, 'user_id');
-        if (!is_null($user_id)) {
-            $rows = $crud->delete($user_id);
-            if ($rows == 1) {
-                http_response_code(204);
-            }
-            if ($rows == 0) {
-                http_response_code(404);
-                $response = [
-                    'errors' => [
-                        [
-                            "status" => 404,
-                            "title" =>  "Utente non trovato",
-                            "details" => "Id: " . $user_id
+        case 'DELETE':
+            $user_id = filter_input(INPUT_GET, 'user_id');
+            if (!is_null($user_id)) {
+                $rows = $crud->delete($user_id);
+                if ($rows == 1) {
+                    $response = [
+                        'data' => $user_id,
+                        'status' => 200
+                    ];
+                    echo json_encode($response);
+                }
+    
+    
+                if ($rows == 0) {
+                    http_response_code(404);
+                    $response = [
+                        'errors' => [
+                            [
+                                'status' => 404,
+                                'title' => "Utente non trovato",
+                                'details' => "Utente id: " . $user_id
+                            ]
                         ]
-                    ]
-                ];
+                    ];
+                    echo json_encode($response);
+                }
             }
-
-            echo json_encode($response);
-        }
-        break;
+            break;
 
     case 'POST':
 
