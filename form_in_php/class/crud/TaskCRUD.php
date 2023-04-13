@@ -7,7 +7,7 @@ use models\Task;
 
 use PDO;
 
-class UserCRUD
+class TaskCRUD
 {
 
 
@@ -17,10 +17,10 @@ class UserCRUD
       Values (:user_id, :name, :due_date, :done)";
         $conn = new PDO(DB_DNS, DB_USER, DB_PASSWORD);
         $stm = $conn->prepare($query);
-        $stm->bindValue(':first_name', $task->user_id, PDO::PARAM_INT);
-        $stm->bindValue(':last_name', $task->name, PDO::PARAM_STR);
-        $stm->bindValue(':birthday', $task->due_date, PDO::PARAM_STR);
-        $stm->bindValue(':birth_city', $task->done, PDO::PARAM_BOOL);
+        $stm->bindValue(':user_id', $task->user_id, PDO::PARAM_INT);
+        $stm->bindValue(':name', $task->name, PDO::PARAM_STR);
+        $stm->bindValue(':due_date', $task->due_date, PDO::PARAM_STR);
+        $stm->bindValue(':done', $task->done, PDO::PARAM_BOOL);
         $stm->execute();
         return $conn->lastInsertId();
     }
@@ -40,37 +40,50 @@ class UserCRUD
         return $stm->rowCount();
     }
     
-    public function read(int $task_id = null):Task|array|bool
+    //read_by_task_id -> GET✅
+    public function read_by_task_id(int $task_id = null):Task|array|bool
     {
-        $conn = new PDO(DB_DNS, DB_USER, DB_PASSWORD);
-        if (!is_null($task_id)) {
-            $query = "SELECT * FROM task where task_id = :task_id;";
-            $stm = $conn->prepare($query);
-            $stm->bindValue(':task_id', $task_id, PDO::PARAM_INT);
-            $stm->execute();
-            $result = $stm->fetchAll(PDO::FETCH_CLASS, 'models\Task');
-            if (count($result) == 1) {
-                return $result[0];
-            }
-            if (count($result) > 1) {
-                throw new \Exception("Chiave primaria duplicata", 1);
-            }
-            if (count($result) === 0) {
-                return false;
-            }
-        } else {
-            $query = "SELECT * FROM task;";
-            $stm = $conn->prepare($query);
-            $stm->execute();
-            $result = $stm->fetchAll(PDO::FETCH_CLASS, 'models\Task');
-            if (count($result) === 0) {
-                return false;
-            }
-            return $result;
-        }
-        //echo "ciao sono ".User::class."\n";
+        $conn = new \PDO(DB_DNS, DB_USER, DB_PASSWORD);
+        $query = "SELECT * FROM task WHERE task_id = :task_id";
+        $stm = $conn -> prepare($query);
+        $stm -> bindValue(':task_id', $task_id, PDO::PARAM_INT);
+        
+        $stm -> execute();//va sempre prima del $result
+        $result = $stm -> fetchAll(PDO::FETCH_CLASS, Task::class);
+        
+        return $result;//ritorna un solo elemento, task_id univoco
 
     }
+    
+    //read_by_user_id -> GET✅
+    public function read_by_user_id(int $user_id = null):Task|array|bool
+    {
+        $conn = new \PDO(DB_DNS, DB_USER, DB_PASSWORD);
+        $query = "SELECT * FROM task WHERE user_id = :user_id";
+        $stm = $conn -> prepare($query);
+        $stm -> bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        
+        $stm -> execute();//va sempre prima del $result
+        $result = $stm -> fetchAll(PDO::FETCH_CLASS, Task::class);
+    
+        return $result;
+    }
+
+    //read_all -> GET✅
+    public function read_all():Task|array|bool
+    {
+        $conn = new \PDO(DB_DNS, DB_USER, DB_PASSWORD);
+        $query = "SELECT * FROM task";
+        $stm = $conn -> prepare($query);
+        
+        $stm -> execute();//va sempre prima del $result
+        $result = $stm -> fetchAll(PDO::FETCH_CLASS, Task::class);
+            
+        if(count($result) === 0){
+            return false;
+        }
+        return $result;
+        }
 
     public function delete($task_id)
     {

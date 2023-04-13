@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="col-sm-8">
         <form class="mt-1 mt-md-5" action="edit_user.php" method="post">
         <input type="hidden" id= "user_id" name="user_id" value="<?= $_GET['user_id'] ?>">
+        
             <div class="mb-3">
                 <label for="first_name" class="form-label">Nome</label>
                 <input type="text" value="<?= $first_name->getValue() ?>" class="form-control <?php echo !$first_name->getValid() ? 'is-invalid' : ''  ?>" name="first_name" id="first_name">
