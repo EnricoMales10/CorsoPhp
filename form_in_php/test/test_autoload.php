@@ -6,7 +6,7 @@
 // use validator\ValidateMail;
 // use validator\ValidateRequired;
 
-//require "./config.php";
+//require "./config1.php";
 
 spl_autoload_register(function($className){
   $className = str_replace("\\","/",$className);

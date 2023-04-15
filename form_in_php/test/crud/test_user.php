@@ -3,7 +3,7 @@
 use crud\UserCRUD;
 use models\User;
 
-include "config.php";
+include "./form_in_php/config1.php";
 include "form_in_php/test/test_autoload.php";
 
 (new PDO(DB_DNS,DB_USER,DB_PASSWORD))->query("TRUNCATE TABLE user;");

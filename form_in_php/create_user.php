@@ -9,7 +9,7 @@ use validator\ValidateMail;
 use validator\ValidateRequired;
 use validator\ValidatorRunner;
 
-require "../config.php";
+require "./config1.php";
 require "./autoload.php";
 
 //error_reporting(E_ALL); li vede tutti
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $crud = new UserCRUD();
         $crud->create($user);
         //Redirect
-        header("location: index_user.php");
+        header("location: index.php");
     }
 
     // $first_name->isValid($_POST['first_name']);

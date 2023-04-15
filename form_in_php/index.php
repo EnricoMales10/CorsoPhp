@@ -2,7 +2,7 @@
 
 use crud\UserCRUD;
 
-require "../config.php";
+require "./config1.php";
 require "./autoload.php";
 
 $users = (new UserCRUD())->read();
@@ -10,7 +10,7 @@ $users = (new UserCRUD())->read();
 ?>
 
 <?php require "./class/views/head_view.php"  ?>
-
+<a href="create_user.php" class="btn btn-sm btn-primary" >aggiungi utente</a>
 <table class="table">
     <tr>
         <th>#</th>
