@@ -16,3 +16,8 @@ function frase({name,due_date}) {
     const frase2 = `Ti ricordi che il ${due_date} hai dovuto ${name}`
 console.log(frase2)
 }
+
+var props ={Titolo:"La storia di Mario",Autore:"Mario"}
+var autore = props.Autore
+//const {Autore} = props corrisponde a props.Autore
+const {Autore,Titolo} = props 

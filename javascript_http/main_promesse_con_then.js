@@ -32,7 +32,7 @@ const user_locale = [
         "user_id": 3
       }
 ]
-UserTable(user_locale,"lista_utenti_1")
+UserTable(user_locale,"lista_utenti_2")
 
 // getUser().then((json)=>{
 //     //view

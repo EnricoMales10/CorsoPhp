@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="./assets/css/style.css" rel="stylesheet">
+    <title>Manager</title>
+</head>
+<body>
+    <header class="bg-light p-1">
+        <div class="avatar container">
+            <img class="avatar__img" src="./img/cane.jpg" alt="">
+            <div class="avatar__user display-6">
+                Manager
+                     </div>
+    </div>
+
+    </header>
+
+    <main class="container">
+    <section class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+    
+            <div class="TaskItem">
+                <form>
+                    <input type="text" id="task" name="task" value="Aggiungi nuova task" class="form-control">
+                    <label for="due_date" class="form-label">Data di scadenza</label>
+                    <input type="date" value="" class="form-control date-picker" name="due_date" id="due_date">
+                    <input type="button" name="add-task" value="Add" class="btn btn-primary btn-sm btn-add">
+                    <br>
+                    <a href="" class="btn btn-primary btn-sm">All</a> 
+                    <a href="" class="btn btn-primary btn-sm">Active</a> 
+                    <a href="" class="btn btn-primary btn-sm">Completed</a>
+                </form>
+            </div>
+            <div>
+                <label for="search_date" class="form-label"></label>
+                <input type="date" value="" class="form-control date-picker" name="search_date" id="search_date">
+                <a class="btn btn-primary btn-sm" href="">Today</a> 
+            </div>
+            <div class="">
+                <ul class="list-group">
+                    <li>Utente 1</li>
+                    <li class="list-group-item justify-content-between align-items-center 
+                    border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+                        <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                        <label for="checkbox" id="text">
+                            TaskItem
+                        </label>
+                        <a class="btn btn-primary btn-sm" href="#" data-mdb-toggle="tooltip" title="Remove TaskItem"> X </a>
+                    </li>
+                    <li class="list-group-item justify-content-between align-items-center 
+                    border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+                        <input checked class="form-check-input me-1" type="checkbox" id="checkbox" value="" aria-label="...">
+                        <label for="checkbox" id="text">
+                            <s>TaskItem</s>
+                        </label>
+                        <a class="btn btn-primary btn-sm" href="#" data-mdb-toggle="tooltip" title="Remove TaskItem"> X </a>
+                    </li>
+                </ul>
+                <ul class="list-group">
+                    <li>Utente 2</li>
+                    <li class="list-group-item justify-content-between align-items-center 
+                    border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+                        <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                        TaskItem 2
+                        <a class="btn btn-primary btn-sm" href="#" data-mdb-toggle="tooltip" title="Remove TaskItem"> X </a>
+                    </li>
+                    <li class="list-group-item justify-content-between align-items-center 
+                    border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+                        <input checked class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                        <s>TaskItem 2</s>
+                        <a class="btn btn-primary btn-sm" href="#" data-mdb-toggle="tooltip" title="Remove TaskItem"> X </a>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        <div class="col-sm-3"></div>
+    </section>
+</main>
+<footer class="footer-bottom footer mt-auto py-3 bg-light">
+  <div class="container">
+    <span class="text-muted">Footer.</span>
+  </div>
+</footer>
