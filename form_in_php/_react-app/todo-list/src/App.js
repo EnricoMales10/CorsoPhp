@@ -11,10 +11,7 @@ import { activeFilter, addTask, completedFilter, removeTask } from './service/To
 function App() {
 
 const [taskListData,setTaskListData] = useState([
-  
-])
-  // const taskListData = [
-    // {
+  // {
     //   user_id: 1,
     //   name: "Spesa",
     //   due_date: "2024-12-31",
@@ -28,8 +25,8 @@ const [taskListData,setTaskListData] = useState([
   //     done: true,
   //     task_id: 2
   //   }
-  // ]
-
+])
+  const [filtredTask,setFiltredTask]=useState(taskListData)
   // const [taskListData, setTaskListData] = useState([])
 
   // function aggiungiTask() {
@@ -62,16 +59,17 @@ const [taskListData,setTaskListData] = useState([
 
   }
   function onShowAll() {
-    
+        setFiltredTask(taskListData)   
   }
 
   function onShowActive() {
-    
+    const res = activeFilter(taskListData)
+    setFiltredTask(res)   
   }
 
   function onShowCompleted() {
-    //chiamo il servizio
-    //aggiorno il sevizio    
+    const res = completedFilter(taskListData)
+    setFiltredTask(res)   
   }
 
 
@@ -84,10 +82,9 @@ const [taskListData,setTaskListData] = useState([
       <button onClick={onShowActive}>Active</button>
       <button onClick={onShowCompleted}>Completed</button>
       <TaskList header={'Paolo'} tasks={taskListData}>
-        {taskListData.map(task => <TaskItem key={task.id} parentRemoveTask={parentRemoveTask} id={task.id} done={task.done} name={task.name} />)}
+        {filtredTask.map(task => <TaskItem key={task.id} parentRemoveTask={parentRemoveTask} id={task.id} done={task.done} name={task.name} />)}
       </TaskList>
       
-
     </main>
   )
 }

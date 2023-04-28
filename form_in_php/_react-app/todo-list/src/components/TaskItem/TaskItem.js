@@ -1,18 +1,22 @@
+import { useState } from "react";
+
 const TaskItem = ({name,done,id,parentRemoveTask}) => {
+
+const [doneCheckbox,setDoneCheckbox]=useState(done)
 
     function onRemoveTask() {
         console.log(('task '+id));
         parentRemoveTask(id)
     }
 
-function onUpdateStatus() {
-    console.log(id,!done);
+function onUpdateStatus(event) {
+    setDoneCheckbox(event.target.checked)
 }
 
     return (
         <li className={done ? 'done': ''}>
             
-            <input onChange={onUpdateStatus} checked={done} type="checkbox" />
+            <input onChange={onUpdateStatus} checked={doneCheckbox} type="checkbox" />
             {done}
             <label>
                 {name}
