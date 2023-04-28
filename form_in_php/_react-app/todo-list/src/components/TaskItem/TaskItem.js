@@ -1,21 +1,26 @@
-const TaskItem = props => {
+const TaskItem = ({name,done,id,parentRemoveTask}) => {
+
+    function onRemoveTask() {
+        console.log(('task '+id));
+        parentRemoveTask(id)
+    }
+
+function onUpdateStatus() {
+    console.log(id,!done);
+}
+
     return (
-        <div>
-                <ul className="list-group">
-                    <li className="list-group-item justify-content-between align-items-center 
-                    border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-                        <input className="form-check-input me-1" type="checkbox" value="" aria-label="..."/>
-                        TaskItem
-                        <a className="btn btn-primary btn-sm" href="#" data-mdb-toggle="tooltip" title="Remove TaskItem"> X </a>
-                    </li>
-                    <li className="list-group-item justify-content-between align-items-center 
-                    border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-                        <input checked="" className="form-check-input me-1" type="checkbox" value="" aria-label="..."/>
-                        <s>TaskItem</s>
-                        <a className="btn btn-primary btn-sm" href="#" data-mdb-toggle="tooltip" title="Remove TaskItem"> X </a>
-                    </li>
-                </ul>
-            </div>
+        <li className={done ? 'done': ''}>
+            
+            <input onChange={onUpdateStatus} checked={done} type="checkbox" />
+            {done}
+            <label>
+                {name}
+            </label>
+            <button className="btn btn-primary btn-sm" href="#" data-mdb-toggle="tooltip" title="Edit TaskItem">Edit</button>
+            <button className="btn btn-primary btn-sm" href="#" data-mdb-toggle="tooltip" onClick={onRemoveTask} title="Remove TaskItem">Remove</button>
+
+        </li>
     )
 }
 export default TaskItem;
